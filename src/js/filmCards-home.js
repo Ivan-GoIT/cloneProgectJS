@@ -1,6 +1,6 @@
 import allGenres from './genres.json';
 import FetchData from './FetchData.js';
-import {pagination} from './pagination';
+import { pagination } from './pagination';
 
 const cardsListLibrary = document.querySelector('.cards__list--library');
 const cardsList = document.querySelector('.cards__list');
@@ -16,7 +16,7 @@ if (cardsListLibrary !== null) {
       console.log('даные которые пришли', response.data);
       insertMarkup(createCard(response.data), cardsList);
       addRemDataToLocalstorage(response.data);
-        pagination(response);
+      pagination(response);
     })
     .catch(err => {
       console.log('index err');
@@ -52,7 +52,7 @@ function insertMarkup(htmlMarkup, htmlEl) {
 }
 
 //удаления и сохранения локал сторедж
- function addRemDataToLocalstorage(data) {
+function addRemDataToLocalstorage(data) {
   localStorage.setItem('allFilmOnPage', JSON.stringify(data));
 }
 
@@ -77,7 +77,7 @@ function getShortName(string) {
 
 //Функция которая отвечает за жанр
 const { genres } = allGenres;
- function findGenresOfMovie(ids) {
+function findGenresOfMovie(ids) {
   const arr = ids.flatMap(id => genres.filter(element => element.id === id));
   let movieGenres = arr.map(el => el.name);
   if (movieGenres.length > 2) {
@@ -92,5 +92,11 @@ const { genres } = allGenres;
   return movieGenres.join(', ');
 }
 
-export { createCard, insertMarkup,findGenresOfMovie,addRemDataToLocalstorage, cardsList, cardsListLibrary };
-
+export {
+  createCard,
+  insertMarkup,
+  findGenresOfMovie,
+  addRemDataToLocalstorage,
+  cardsList,
+  cardsListLibrary,
+};

@@ -5,7 +5,7 @@ import {
   insertMarkup,
   addRemDataToLocalstorage,
 } from './filmCards-home.js';
-import {pagination} from './pagination.js';
+import { pagination } from './pagination.js';
 
 const cardsList = document.querySelector('.cards__list');
 const movieGalleryFetch = new FetchData();
@@ -30,8 +30,8 @@ form.addEventListener('submit', e => {
         Notiflix.Loading.remove(500);
         setTimeout(() => message.classList.remove('visible'), 4000);
       } else {
-              insertMarkup(createCard(response.data), cardsList);
-              addRemDataToLocalstorage(response.data);
+        insertMarkup(createCard(response.data), cardsList);
+        addRemDataToLocalstorage(response.data);
         Notiflix.Loading.remove(500);
         pagination(response);
       }

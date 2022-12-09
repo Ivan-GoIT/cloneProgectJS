@@ -12,13 +12,8 @@ const cardsOnPageQuantity = 20;
 let fetchObj = {};
 
 const dataNormalize = data => {
-  console.log('dataNormalize');
-  console.log(data.length);
   total_pages =
     data.length > 1 ? Math.ceil(data.length / cardsOnPageQuantity) : 1;
-  console.log('dataNormalize Math.ceil(data.length / cardsOnPageQuantity)');
-  console.log(total_pages);
-
   return { page: 1, total_pages, data };
 };
 
@@ -61,15 +56,12 @@ const onPaginationItemClick = async evt => {
 };
 
 function paginationLibrary(fetchData) {
-  console.log('paginationLibrary');
-
   if (Array.isArray(fetchData)) {
     fetchObj = dataNormalize(fetchData);
   }
   total_pages = fetchObj.total_pages;
 
   const paginationEl = document.querySelector('#pagination-list');
-  console.log('paginationLibrary');
 
   paginationEl.innerHTML = paginationMarkup(
     getArrPageNumbersForView(fetchObj.page, fetchObj.total_pages),

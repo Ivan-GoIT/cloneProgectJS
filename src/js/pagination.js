@@ -1,7 +1,7 @@
 import FetchData from './FetchData';
-import {createCard,insertMarkup,cardsList} from './filmCards-home';
+import { createCard, insertMarkup, cardsList } from './filmCards-home';
 import svgArrows from '../images/sprite.svg';
-import {addRemDataToLocalstorage} from './filmCards-home.js'
+import { addRemDataToLocalstorage } from './filmCards-home.js';
 
 const movieGalleryFetch = new FetchData();
 
@@ -9,8 +9,8 @@ let search = null;
 let total_pages = null;
 
 const paginationMarkup = (arr = [], page = 1) => {
-  if (arr.length<=1) {
-    return''
+  if (arr.length <= 1) {
+    return '';
   }
   const currentPage = (arrItem, page) => (arrItem === page ? 'current' : '');
 
@@ -82,9 +82,9 @@ const getArrPageNumbersForView = (currentPage, totalPages) => {
   return ArrPageNumbersForView;
 };
 
-const markupUpdate = (obj,htmlEl) => {
+const markupUpdate = (obj, htmlEl) => {
   insertMarkup(createCard(obj.data), htmlEl);
-    pagination(obj);
+  pagination(obj);
 };
 
 const fetchPage = async (page = 1, search = '') => {
@@ -97,7 +97,7 @@ const fetchPage = async (page = 1, search = '') => {
   return result;
 };
 
-const onArrowClick = (evt, currentPage,total_pages) => {
+const onArrowClick = (evt, currentPage, total_pages) => {
   const arrowEl = evt.target.closest('.arrow');
   if (arrowEl.hasAttribute('data-left_one_page')) {
     const prevPage = currentPage - 1;
@@ -116,15 +116,16 @@ const onPaginationItemClick = async evt => {
   const paginButtonContent = evt.target.textContent;
   if (!(pageNum = parseInt(paginButtonContent))) pageNum = 1;
   if (paginButtonContent === '...') return;
-  if (evt.target.closest('.arrow')) pageNum = onArrowClick(evt, currentPage,total_pages);
+  if (evt.target.closest('.arrow'))
+    pageNum = onArrowClick(evt, currentPage, total_pages);
 
   const data = await fetchPage(pageNum, search);
-  addRemDataToLocalstorage(data.data)
+  addRemDataToLocalstorage(data.data);
   markupUpdate(data, cardsList);
   window.scrollTo(0, 0);
 };
 
- function pagination(fetchObj) {
+function pagination(fetchObj) {
   const paginationEl = document.querySelector('#pagination-list');
 
   paginationEl.innerHTML = paginationMarkup(
